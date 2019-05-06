@@ -1,0 +1,11 @@
+# CMake stuff
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Makefiles are generated automatically
+Makefile
+
+# Executables
+mud
+
