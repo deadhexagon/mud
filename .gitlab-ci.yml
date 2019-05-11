@@ -1,0 +1,10 @@
+image: gcc
+
+build:
+    stage: build
+    artifacts:
+        paths:
+            - mud
+
+test:
+    stage: test
