@@ -2,9 +2,9 @@ image: gcc
 
 build:
     stage: build
+    script:
+        - cmake -DCMAKE_BUILD_TYPE=Debug .
+        - make
     artifacts:
         paths:
             - mud
-
-test:
-    stage: test
