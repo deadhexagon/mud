@@ -6,6 +6,7 @@ This is a simple MUD (multi-user dungeon) written in C++
 
 - Linux x86_64
 - [GCC](http://gcc.gnu.org/)
+- [Cmake](http://www.cmake.org/)
 - [Boost](http://www.boost.org/) (only tested with 1.69.0)
 
 ## Building
