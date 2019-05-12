@@ -53,10 +53,12 @@ namespace Mud
 
                 SocketType &Socket() { return m_socket; };
 
+            protected:
+                SocketType m_socket;
+
             private:
                 void WriteToSocket();
 
-                SocketType m_socket;
                 boost::asio::streambuf m_outputBuffer1, m_outputBuffer2;
                 std::ostream m_outputStream1, m_outputStream2;
                 boost::asio::streambuf *m_outputBuffer, *m_bufferBeingWritten;
