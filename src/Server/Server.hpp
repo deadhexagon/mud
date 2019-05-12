@@ -1,7 +1,7 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
-#include <vector>
+#include <list>
 #include <boost/asio.hpp>
 #include "Connection.hpp"
 
@@ -62,7 +62,7 @@ namespace Mud
                 boost::asio::io_service m_io_service;
                 boost::asio::signal_set m_signal_set;
                 boost::asio::ip::tcp::acceptor m_acceptor;
-                std::vector<Connection> m_connections;
+                std::list<Connection> m_connections;
         };
     }
 }
