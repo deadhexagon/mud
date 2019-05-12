@@ -11,6 +11,7 @@ add_compile_options(-Wreturn-type -Wreorder -Wall)
 set(SRCS
     src/main.cpp
     src/Server/Connection.cpp
+    src/Server/LineOrientedConnection.cpp
 )
 
 add_executable(mud ${SRCS})
