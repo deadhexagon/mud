@@ -24,10 +24,26 @@ namespace Mud
                       m_moreToWrite(false)
                 {}
 
-                void Write(const std::string &message)
+                template <class T>
+                void Write(const T &message)
                 {
                     *m_outputStream << message;
                     WriteToSocket();
+                }
+
+                template <class T>
+                std::ostream &operator << (const T &message)
+                {
+                    Write(message);
+                    m_moreToWrite = true;
+                    return *m_outputStream;
+                }
+
+                std::ostream &ostream()
+                {
+                    WriteToSocket();
+                    m_moreToWrite = true;
+                    return *m_outputStream;
                 }
 
                 void Start(void)
@@ -37,10 +53,12 @@ namespace Mud
 
                 SocketType &Socket() { return m_socket; };
 
+            protected:
+                SocketType m_socket;
+
             private:
                 void WriteToSocket();
 
-                SocketType m_socket;
                 boost::asio::streambuf m_outputBuffer1, m_outputBuffer2;
                 std::ostream m_outputStream1, m_outputStream2;
                 boost::asio::streambuf *m_outputBuffer, *m_bufferBeingWritten;

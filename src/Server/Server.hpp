@@ -3,7 +3,7 @@
 
 #include <list>
 #include <boost/asio.hpp>
-#include "Connection.hpp"
+#include "LineOrientedConnection.hpp"
 
 namespace Mud
 {
@@ -62,7 +62,7 @@ namespace Mud
                 boost::asio::io_service m_io_service;
                 boost::asio::signal_set m_signal_set;
                 boost::asio::ip::tcp::acceptor m_acceptor;
-                std::list<Connection> m_connections;
+                std::list<LineOrientedConnection> m_connections;
         };
     }
 }
