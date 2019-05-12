@@ -1,6 +1,7 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
+#include <vector>
 #include <boost/asio.hpp>
 #include "Connection.hpp"
 
@@ -11,8 +12,6 @@ namespace Mud
         class Server
         {
             public:
-                typedef boost::asio::ip::tcp::socket SocketType;
-
                 Server(int port)
                     : m_signal_set(m_io_service, SIGINT, SIGTERM),
                     m_acceptor(
@@ -41,16 +40,18 @@ namespace Mud
             private:
                 void Accept(void)
                 {
-                    m_sockets.push_back(SocketType(m_io_service));
-                    SocketType &socket = m_sockets.back();
+                    m_connections.emplace_back(m_io_service);
+                    auto &connection = m_connections.back();
 
                     m_acceptor.async_accept(
-                        socket,
-                        [this, &socket](boost::system::error_code error)
+                        connection.Socket(),
+                        [this, &connection](boost::system::error_code error)
                         {
                             if (!error)
                             {
                                 std::cout << "Connection accepted." << std::endl;
+
+                                connection.Start();
 
                                 Accept();
                             }
@@ -61,7 +62,7 @@ namespace Mud
                 boost::asio::io_service m_io_service;
                 boost::asio::signal_set m_signal_set;
                 boost::asio::ip::tcp::acceptor m_acceptor;
-                std::vector<SocketType> m_sockets;
+                std::vector<Connection> m_connections;
         };
     }
 }
