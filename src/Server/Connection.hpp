@@ -24,10 +24,26 @@ namespace Mud
                       m_moreToWrite(false)
                 {}
 
-                void Write(const std::string &message)
+                template <class T>
+                void Write(const T &message)
                 {
                     *m_outputStream << message;
                     WriteToSocket();
+                }
+
+                template <class T>
+                std::ostream &operator << (const T &message)
+                {
+                    Write(message);
+                    m_moreToWrite = true;
+                    return *m_outputStream;
+                }
+
+                std::ostream &ostream()
+                {
+                    WriteToSocket();
+                    m_moreToWrite = true;
+                    return *m_outputStream;
                 }
 
                 void Start(void)
