@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_compile_options(-Wreturn-type -Wreorder -Wall)
 set(SRCS
     src/main.cpp
+    src/Server/Connection.cpp
 )
 
 add_executable(mud ${SRCS})
